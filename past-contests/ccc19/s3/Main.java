@@ -9,6 +9,7 @@ public class Main {
     for (int i = 0; i < 3; i++) {
       String[] row = br.readLine().split(" ");
       grid[i] = (row);
+
     }
 
     for (int i = 0; i < 3; i++) {
