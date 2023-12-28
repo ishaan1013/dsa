@@ -31,12 +31,3 @@ class Solution:
                     islands += 1
 
         return islands
-
-
-if __name__ == "__main__":
-    soln = Solution()
-
-    n = soln.numIslands([["1", "1", "1", "1", "0"], ["1", "1", "0", "1", "0"], [
-                        "1", "1", "0", "0", "0"], ["0", "0", "0", "0", "0"]])
-
-    print(n)
