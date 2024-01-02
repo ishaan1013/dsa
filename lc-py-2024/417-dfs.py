@@ -3,11 +3,9 @@ class Solution:
         if not heights:
             return None
 
-        m = len(heights)
-        n = len(heights[0])
+        m, n = len(heights), len(heights[0])
 
-        pacific = set()
-        atlantic = set()
+        pacific, atlantic = set(), set()
 
         def flood(x, y, history, prev):
             if x < 0 or y < 0 or x >= m or y >= n or (x, y) in history or heights[x][y] < prev:
@@ -26,8 +24,5 @@ class Solution:
         for col in range(n):
             flood(0, col, pacific, heights[0][col])
             flood(m-1, col, atlantic, heights[m-1][col])
-
-        print(list(pacific))
-        print(list(atlantic))
 
         return list(pacific.intersection(atlantic))
