@@ -1,36 +1,40 @@
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
-        pos, neg, zero = set(), set(), []
-        res = set()
+        pos, neg = defaultdict(int), defaultdict(int)
+        z = 0
+
+        res = []
 
         for n in nums:
             if n > 0:
-                pos.add(n)
+                pos[n] += 1
             elif n < 0:
-                neg.add(n)
+                neg[n] += 1
             else:
-                zero.append(n)
+                z += 1
 
-        if zero:
-            if len(zero) >= 3:
-                res.add((0, 0, 0))
+        if z:
+            if z >= 3:
+                res.append((0, 0, 0))
+            for p in pos:
+                if -p in neg:
+                    res.append((-p, 0, p))
 
-            for n in pos:
-                if n * -1 in neg:
-                    res.add(n*-1, 0, n)
+        lpos = list(pos.items())
+        lneg = list(neg.items())
 
-        for i in range(len(pos)):
-            for j in range(i+1, len(pos)):
-                tgt = (i + j) * -1
-
+        for index, (k, v) in enumerate(lpos):
+            for k2, _ in lpos[index:]:
+                tgt = -(k+k2)
                 if tgt in neg:
-                    res.add(tuple(sorted([i, j, tgt])))
+                    if k != k2 or (k == k2 and v > 1):
+                        res.append((k, k2, tgt))
 
-        for i in range(len(neg)):
-            for j in range(i+1, len(neg)):
-                tgt = (i + j) * -1
-
+        for index, (k, v) in enumerate(lneg):
+            for k2, _ in lneg[index:]:
+                tgt = -(k+k2)
                 if tgt in pos:
-                    res.add(tuple(sorted([i, j, tgt])))
+                    if k != k2 or (k == k2 and v > 1):
+                        res.append((k, k2, tgt))
 
         return res
