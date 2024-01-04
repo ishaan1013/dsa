@@ -13,6 +13,8 @@ class Solution:
                 res.append(v)
             else:  # contained
                 newInterval = [min(lo, v[0]), max(hi, v[1])]
+                lo = newInterval[0]
+                hi = newInterval[1]
 
         # reaches this point if there's no pre-existing interval greater than newInterval, without overlap
         res.append(newInterval)
